@@ -2,6 +2,10 @@ name: Delete quay image on PR closed
 on:
   pull_request_target:
     - main
+  pull_request:
+    types:
+      - closed
+
   workflow_dispatch: {}  #
 env:
   QUAY_ODH_CAIKIT_TGIS_SERVING_IMAGE_REPO: ${{ secrets.QUAY_ODH_CAIKIT_TGIS_SERVING_IMAGE_REPO }}
