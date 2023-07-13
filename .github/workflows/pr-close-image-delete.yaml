@@ -31,7 +31,7 @@ jobs:
           QUAY_ROBOT_USERNAME: ${{ secrets.QUAY_ROBOT_USERNAME }}
           TEST: ${{ secrets.TEST }}
         run: |
-         echo "$TEST"
+         echo "$TEST2"
          skopeo login quay.io -u ${QUAY_ROBOT_USERNAME} -p ${QUAY_TOKEN}
       - name: Delete PR image
         shell: bash
