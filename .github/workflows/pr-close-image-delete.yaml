@@ -4,7 +4,7 @@ on:
     - main
   pull_request:
     types:
-      - open
+      - opened
       - closed
 
   workflow_dispatch: {}  #
