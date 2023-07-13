@@ -29,3 +29,5 @@ jobs:
         run: |
          echo "$TEST"
          skopeo login quay.io -u "$QUAY_ROBOT_USERNAME" -p "$QUAY_TOKEN"
+         skopeo list-tag docker://${QUAY_CAIKIT_TGIS_SERVING_IMAGE_REPO}:pr-${{ env.PR }}
+
