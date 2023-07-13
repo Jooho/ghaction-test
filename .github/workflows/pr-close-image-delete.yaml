@@ -28,12 +28,12 @@ jobs:
           TEST: ${{ secrets.TEST }}
         run: |
          echo "$TEST"
-         skopeo login quay.io -u "$QUAY_ROBOT_USERNAME" -p "$QUAY_TOKEN"
+         skopeo login quay.io -u $QUAY_ROBOT_USERNAME -p $QUAY_TOKEN
       - name: Delete PR image
         shell: bash
         env:
           PR: ${{ github.event.pull_request.number }}
         run: |
           echo "skopeo list-tags docker://${QUAY_ODH_CAIKIT_TGIS_SERVING_IMAGE_REPO}:pr-$PR"
-          skopeo list-tags docker://${QUAY_ODH_CAIKIT_TGIS_SERVING_IMAGE_REPO}:pr-${{ env.PR }}
+          skopeo list-tags docker://${QUAY_ODH_CAIKIT_TGIS_SERVING_IMAGE_REPO}:pr-${PR}
 
