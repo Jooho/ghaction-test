@@ -34,5 +34,5 @@ jobs:
         env:
           PR: ${{ github.event.pull_request.number }}
         run: |
-          skopeo list-tags docker://${QUAY_ODH_CAIKIT_TGIS_SERVING_IMAGE_REPO}:pr-"$env.PR"
+          skopeo list-tags docker://"${QUAY_ODH_CAIKIT_TGIS_SERVING_IMAGE_REPO}":pr-"$PR"
 
