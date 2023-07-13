@@ -28,7 +28,7 @@ jobs:
           TEST: ${{ secrets.TEST }}
         run: |
          echo "$TEST"
-         skopeo login quay.io -u $QUAY_ROBOT_USERNAME -p $QUAY_TOKEN
+         skopeo login quay.io -u $QUAY_ROBOT_USERNAME -p "$QUAY_TOKEN"
       - name: Delete PR image
         shell: bash
         env:
