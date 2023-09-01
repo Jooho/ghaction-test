@@ -1,0 +1,45 @@
+# Workflow Secrets required to be setup in repo:
+# QUAY_ID
+# QUAY_TOKEN
+# DSP_DEVS_ACCESS_TOKEN
+name: KServe
+run-name: Create a PR to build KServe Image
+on:
+  workflow_dispatch:
+    inputs:      
+      target_branch:
+        default: 'release-v0.11'
+        description: 'Target Branch Name (e.g. release-v0.11, rhods-1.3x, etc.)'
+        required: true
+      gh_org:
+        default: 'opendatahub-io'
+        description: 'KServe GitHub Org'
+        required: true
+env:
+  # GH_USER_EMAIL: 140449482+dsp-developers@users.noreply.github.com
+  GH_USER_EMAIL: ljhiyh@gmail.com
+  GH_USER_NAME: openshift-ai-serving-developers
+  TARGET_BRANCH: ${{ inputs.target_branch }}
+  TARGET_COMPONENT: kserve
+  GH_ORG: ${{ inputs.gh_org }}
+  CONFIG_TEMPLATE: "./.github/scripts/templates/config.yaml"
+jobs:
+  generate_pr:
+      name: Generate Build PR
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          name: checkout
+          with:
+            token: ${{ secrets.AI_SERVING_DEV_ACCESS_TOKEN }}
+            ref: ${{ env.TARGET_BRANCH }}
+        - name: generate pr
+          env:
+            GH_TOKEN: ${{ secrets.AI_SERVING_DEV_ACCESS_TOKEN }}
+            GH_USER_NAME: ${{ env.GH_USER_NAME }}
+            GH_USER_EMAIL: ${{ env.GH_USER_EMAIL }}
+            TARGET_BRANCH: ${{ env.TARGET_BRANCH }}
+            TARGET_COMPONENT: ${{ env.TARGET_COMPONENT }}
+            GH_ORG: ${{ env.GH_ORG }}
+            CONFIG_TEMPLATE: ${{ env.CONFIG_TEMPLATE }}
+          run: ./.github/scripts/generate_pr.sh
